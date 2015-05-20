@@ -29,7 +29,10 @@ public class SetBroadcastCommand extends Command {
             throw new ValidationException("incorrect arguments");
         } else {
             try {
-                new URI(args[1]); // just for validation purposes
+                URI uri = new URI(args[1]); // just for validation purposes
+                if(!"udp".equals(uri.getScheme())) {
+                    throw new ValidationException("incorrect uri schema");
+                }
             } catch (Exception e) {
                 throw new ValidationException(e);
             }
